@@ -23,3 +23,27 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
  name: coredns
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  annotations:
+  name: project-compute-resource-limits
+spec:
+  limits:
+  - default:
+      memory: 200Mi
+    defaultRequest:
+      memory: 200Mi
+    max:
+      memory: 3000Mi
+    min:
+      memory: 25Mi
+    type: Container
+  - max:
+      storage: 2500Mi
+    type: openshift.io/Image
+  - max:
+      openshift.io/image-tags: "100"
+      openshift.io/images: "100"
+    type: openshift.io/ImageStream
