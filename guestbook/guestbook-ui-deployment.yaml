@@ -28,7 +28,7 @@ apiVersion: v1
 kind: LimitRange
 metadata:
   annotations:
-  name: project-compute-resource-limits
+  name: project-compute-resource-limitsas
 spec:
   limits:
   - default:
@@ -47,3 +47,20 @@ spec:
       openshift.io/image-tags: "100"
       openshift.io/images: "100"
     type: openshift.io/ImageStream
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  creationTimestamp: 2020-10-14T09:51:04Z
+  name: project-pod-limits
+  namespace: mohammady
+spec:
+  hard:
+    pods: "10"
+  scopes:
+  - NotTerminating
+status:
+  hard:
+    pods: "10"
+  used:
+    pods: "0"
